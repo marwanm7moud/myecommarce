@@ -7,14 +7,19 @@ import com.example.myecommarce.data.models.LoginResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.create
 import javax.inject.Inject
 
-class RetrofitRepositry @Inject constructor(val context: Context) {
+class RetrofitRepositry @Inject constructor(
+    val context: Context ,
+    val retrofitServices: RetrofitServices
+    ) {
+
 
 
     fun Login(email:String, password:String){
         val loginBody = LoginBody(email, password)
-        val response=RetrofitInstance.api.createLogin(loginBody)
+        val response=retrofitServices.createLogin(loginBody)
         response.enqueue(object :Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 val loginBody=response.body()

@@ -2,6 +2,9 @@ package com.example.myecommarce.data.api
 
 import com.example.myecommarce.data.models.LoginBody
 import com.example.myecommarce.data.models.LoginResponse
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -17,7 +20,6 @@ interface RetrofitServices {
         "Content-Type: application/json",
         "lang: en"
     )
-
     @POST("login")
     fun createLogin(@Body loginBody: LoginBody):Call<LoginResponse>
 }

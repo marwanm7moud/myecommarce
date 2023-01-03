@@ -7,8 +7,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-abstract class RetrofitInstance {
-    companion object {
+object RetrofitInstance {
+
+
          val getInstance by lazy {
             val logging = HttpLoggingInterceptor()
             logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -22,8 +23,7 @@ abstract class RetrofitInstance {
                 .build()
 
         }
-        val api by lazy {
+        val auth by lazy {
             getInstance.create(RetrofitServices::class.java)
         }
     }
-}
