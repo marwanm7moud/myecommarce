@@ -24,6 +24,6 @@ object RetrofitInstance {
 
         }
         val auth by lazy {
-            getInstance.create(RetrofitServices::class.java)
+            getInstance.create(ApiServices::class.java)
         }
     }

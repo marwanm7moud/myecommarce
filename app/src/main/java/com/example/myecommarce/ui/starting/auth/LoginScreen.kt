@@ -10,21 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.myecommarce.R
-import com.example.myecommarce.data.api.StartingViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 class Login : Fragment() {
 
-    private var viewModel:StartingViewModel?=null
+    private var viewModel:AuthViewModel?=null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        viewModel = ViewModelProvider(requireActivity()).get(StartingViewModel::class.java)
-        viewModel?.Login("",  "")
-
+        viewModel = ViewModelProvider(requireActivity()).get(AuthViewModel::class.java)
+        viewModel?.login("algazzar.abdelra55hman@gmail.com" , "123456")
+        Log.d("marwan" , "done")
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 

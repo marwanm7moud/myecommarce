@@ -2,9 +2,8 @@ package com.example.myecommarce.di
 
 import android.content.Context
 import com.example.myecommarce.data.api.RetrofitInstance
-import com.example.myecommarce.data.api.RetrofitRepositry
-import com.example.myecommarce.data.api.RetrofitServices
-import dagger.Binds
+import com.example.myecommarce.data.repos.Auth.AuthRepositryimpl
+import com.example.myecommarce.data.api.ApiServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,16 +17,15 @@ class modules {
 
 
     @Provides
-    fun getRetrofitService():RetrofitServices = getRetrofit().auth
+    fun getRetrofitService(): ApiServices = getRetrofit().auth
 
     @Provides
-    fun getRetrofit():RetrofitInstance = RetrofitInstance
+    fun getRetrofit(): RetrofitInstance = RetrofitInstance
 
     @Provides
-    fun getRepositry(@ApplicationContext context: Context):RetrofitRepositry {
-       return RetrofitRepositry(context = context,getRetrofitService() )
+    fun getRepositry(@ApplicationContext context: Context): AuthRepositryimpl {
+        return AuthRepositryimpl(getRetrofitService(), context)
     }
-
 
 
 }
