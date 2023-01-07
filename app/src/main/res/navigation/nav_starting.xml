@@ -24,12 +24,17 @@
         <action
             android:id="@+id/action_login_to_registerScreen"
             app:destination="@id/registerScreen"
-            app:popUpTo="@id/registerScreen"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/registerScreen" />
     </fragment>
     <fragment
         android:id="@+id/registerScreen"
         android:name="com.example.myecommarce.ui.starting.auth.RegisterScreen"
         android:label="fragment_register_screen"
-        tools:layout="@layout/fragment_register_screen" />
+        tools:layout="@layout/fragment_register_screen" >
+        <action
+            android:id="@+id/action_registerScreen_to_login"
+            app:destination="@id/login"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

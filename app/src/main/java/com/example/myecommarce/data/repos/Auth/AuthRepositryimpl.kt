@@ -29,11 +29,8 @@ class AuthRepositryimpl @Inject constructor(
         val response = retrofitServices.createLogin(loginBody)
         response.enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                if (response.isSuccessful && response.body()?.status == true) {
+                if (response.isSuccessful) {
                     authResponse.postValue(response.body())
-                    Components.setToken(context , response.body()!!.data.token)
-                }else{
-                    Components.makeToast(context , response.message())
                 }
             }
 
@@ -50,11 +47,8 @@ class AuthRepositryimpl @Inject constructor(
         val response = retrofitServices.createRegister(registerBody)
         response.enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
-                if (response.isSuccessful && response.body()?.status == true) {
+                if (response.isSuccessful) {
                     authResponse.postValue(response.body())
-                    Components.setToken(context , response.body()!!.data.token)
-                }else{
-                    Components.makeToast(context , response.message())
                 }
             }
 
