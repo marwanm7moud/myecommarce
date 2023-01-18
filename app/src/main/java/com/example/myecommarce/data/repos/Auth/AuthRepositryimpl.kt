@@ -1,10 +1,8 @@
 package com.example.myecommarce.data.repos.Auth
 
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.example.myecommarce.data.api.ApiServices
+import com.example.myecommarce.data.api.AuthServices
 import com.example.myecommarce.data.models.Auth.LoginBody
 import com.example.myecommarce.data.models.Auth.AuthResponse
 import com.example.myecommarce.data.models.Auth.RegisterBody
@@ -15,8 +13,7 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class AuthRepositryimpl @Inject constructor(
-    val retrofitServices: ApiServices,
-    val context: Context
+    val retrofitServices: AuthServices,
 ) : AuthRepositry {
 
     var authResponse:MutableLiveData<AuthResponse?> = MutableLiveData()
@@ -66,7 +63,6 @@ class AuthRepositryimpl @Inject constructor(
                 override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                     if (response.isSuccessful && response.body()?.status == true) {
                         authResponse.postValue(response.body())
-                        Components.setToken(context , response.body()!!.data.token)
                     }
                 }
 
@@ -79,7 +75,21 @@ class AuthRepositryimpl @Inject constructor(
         }
     }
 
+    override suspend fun logout(token: String) {
+        val response = retrofitServices.createLogout(token)
+        response.enqueue(object :Callback<AuthResponse>{
+            override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
+               if (response.isSuccessful){
+                   authResponse.postValue(response.body())
+               }
+            }
 
+            override fun onFailure(call: Call<AuthResponse>, t: Throwable) {
+                authResponse.postValue(null)
+            }
+
+        })
+    }
 
 
 }

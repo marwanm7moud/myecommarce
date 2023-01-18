@@ -40,4 +40,9 @@ class AuthViewModel @Inject constructor(val repositry: AuthRepositryimpl ,@Appli
             repositry.getProfile(token)
         }
     }
+    fun logout(token:String)= viewModelScope.launch {
+        withContext(Dispatchers.IO){
+            repositry.logout(token)
+        }
+    }
 }

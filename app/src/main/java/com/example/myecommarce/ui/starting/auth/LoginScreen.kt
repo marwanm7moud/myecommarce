@@ -11,7 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.myecommarce.R
 import com.example.myecommarce.data.models.Auth.AuthResponse
-import com.example.myecommarce.ui.main.ProductActivity
+import com.example.myecommarce.ui.main.MainScreen
+import com.example.myecommarce.ui.starting.StartingActivity
 import com.example.myecommarce.utils.Components
 import com.example.myecommarce.utils.EditTextValidation
 import kotlinx.android.synthetic.main.fragment_login.view.*
@@ -68,7 +69,8 @@ class Login : Fragment(), AuthValidation {
 
     override fun onSuccess(view: View, authResponse: AuthResponse) {
         Components.setToken(requireContext(), authResponse.data.token)
-        startActivity(Intent(requireActivity(), ProductActivity::class.java))
+        startActivity(Intent(requireActivity(), MainScreen::class.java))
+        activity?.finish()
     }
 
     override fun onLoadingDone(view: View) {

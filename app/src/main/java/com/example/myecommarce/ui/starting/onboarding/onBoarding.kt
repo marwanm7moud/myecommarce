@@ -9,17 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.myecommarce.R
 import com.example.myecommarce.adapters.OnBoardingViewPagerAdapter
-import com.example.myecommarce.ui.main.ProductActivity
+import com.example.myecommarce.ui.main.MainScreen
 import com.example.myecommarce.ui.starting.onboarding.onboardingScreens.FirstScreen
 import com.example.myecommarce.ui.starting.onboarding.onboardingScreens.SecondScreen
 import com.example.myecommarce.ui.starting.onboarding.onboardingScreens.ThirdScreen
 import com.example.myecommarce.utils.Components
-import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator
 
 
@@ -68,7 +66,8 @@ class onBoarding : Fragment() {
         Log.d("marwan" , tokenBool.toString())
         if(tokenBool != null){
             Log.d("marwan" , tokenBool)
-            startActivity(Intent(requireActivity() , ProductActivity::class.java))
+            startActivity(Intent(requireActivity() , MainScreen::class.java))
+            activity?.finish()
         }else if(onBoardingBool){
             findNavController().navigate(R.id.action_onBoarding_to_login)
         }

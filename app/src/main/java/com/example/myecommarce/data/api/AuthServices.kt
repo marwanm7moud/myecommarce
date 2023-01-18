@@ -11,7 +11,7 @@ import retrofit2.http.Headers
 import retrofit2.http.POST
 
 
-interface ApiServices {
+interface AuthServices {
     @Headers(
         "Content-Type: application/json",
         "lang: en"
@@ -33,10 +33,12 @@ interface ApiServices {
     @GET("profile")
     fun getProfile(@Header("Authorization")token:String):Call<AuthResponse>
 
-
-
-
-
+    @Headers(
+        "Content-Type: application/json",
+        "lang: en"
+    )
+    @POST("logout")
+    fun createLogout(@Header("Authorization")token:String):Call<AuthResponse>
 
 
 }

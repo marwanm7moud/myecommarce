@@ -1,13 +1,14 @@
 package com.example.myecommarce.di
 
-import android.content.Context
 import com.example.myecommarce.data.api.RetrofitInstance
 import com.example.myecommarce.data.repos.Auth.AuthRepositryimpl
-import com.example.myecommarce.data.api.ApiServices
+import com.example.myecommarce.data.api.AuthServices
+import com.example.myecommarce.data.api.ProductServices
+import com.example.myecommarce.data.repos.main.MainRepositry
+import com.example.myecommarce.data.repos.main.MainRepositryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 
@@ -15,17 +16,23 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 class modules {
 
-
     @Provides
-    fun getRetrofitService(): ApiServices = getRetrofit().auth
+    fun getAuthService(): AuthServices = getRetrofit().auth
+    @Provides
+    fun getProductService(): ProductServices = getRetrofit().product
 
     @Provides
     fun getRetrofit(): RetrofitInstance = RetrofitInstance
 
     @Provides
-    fun getRepositry(@ApplicationContext context: Context): AuthRepositryimpl {
-        return AuthRepositryimpl(getRetrofitService(), context)
+    fun getAuthRepositry(): AuthRepositryimpl {
+        return AuthRepositryimpl(getAuthService())
     }
+    @Provides
+    fun getMainRepositry(): MainRepositryImpl {
+        return MainRepositryImpl(getProductService())
+    }
+
 
 
 }

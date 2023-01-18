@@ -10,5 +10,6 @@ interface AuthRepositry {
     suspend fun login(email:String, password:String)
     suspend fun register(name:String , phone:String , email: String,password: String,image: String)
     suspend fun getProfile(token: String?)
+    suspend fun logout(token: String)
 
 }
